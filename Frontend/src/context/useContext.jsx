@@ -17,7 +17,7 @@ if (!sessionId) {
 }
 
   const startListening = () => {
-   setCurrentAnimation(`hello`);
+   setCurrentAnimation(`hello.001`);
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
@@ -41,13 +41,18 @@ if (!sessionId) {
       startSpeaking(data.aiResponse);
     };
   };
-
+ 
+// idel Retarget.001 ==kiss animation 
+//hello.001 == hello animation
+//thinking.001 == thinking
+//Armature|mixamo.com|Layer0.004 Retarget.002 == argue animation
+//Armature|mixamo.com|Layer0.005 Retarget == talking
 
   const startSpeaking = (aiResponse) => {
     
     const speech = new SpeechSynthesisUtterance(aiResponse);
 
-    setCurrentAnimation("thinking");
+    setCurrentAnimation("thinking.001");
     setSpeaking(true);
  const voices = window.speechSynthesis.getVoices();
 
