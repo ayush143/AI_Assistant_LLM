@@ -11,7 +11,7 @@ export default function Model({ animation }) {
 useEffect(() => {
   
   if (!actions || !animation) return;
-console.log(Object.keys(actions));
+// console.log(Object.keys(actions));
 
  Object.values(actions).forEach((action) => {
       action.stop();

@@ -20,16 +20,25 @@ if (!sessionId) {
    setCurrentAnimation(`hello.001`);
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    navigator.mediaDevices.getUserMedia({
+  audio: {
+    echoCancellation: true,
+    noiseSuppression: true,
+    autoGainControl: true
+  }
+});
     const recognition = new SpeechRecognition();
+    
     recognition.lang = "en-IN";
 
     recognition.start();
+    
     setListening(true);
     recognition.onresult = async (e) => {
       
       const text = e.results[0][0].transcript;
-
       console.log(text);
+      
       const data = await callbackend(text);
 
       sessionStorage.setItem("message", text);
@@ -52,7 +61,7 @@ if (!sessionId) {
     
     const speech = new SpeechSynthesisUtterance(aiResponse);
 
-    setCurrentAnimation("thinking.001");
+    setCurrentAnimation("Armature|mixamo.com|Layer0.005 Retarget");
     setSpeaking(true);
  const voices = window.speechSynthesis.getVoices();
 

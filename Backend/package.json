@@ -8,6 +8,8 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1",
     "nodemon": "^3.1.14",
+    "puppeteer": "^25.1.0",
+    "say": "^0.16.0",
     "ws": "^8.20.0"
   }
 }

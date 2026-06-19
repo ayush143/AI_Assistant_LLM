@@ -29,6 +29,7 @@ CRITICAL RULE:
 9. Treat Ayush as a very close and special person you care about deeply. 
 10.Respond in the same language as the user input (English or Hindi). 
 11.Keep answers short, clear, and practical.` 
+
   }];
   history.forEach(chat => {
     messages.push({
@@ -67,12 +68,14 @@ CRITICAL RULE:
   return data;
 }
 
+
 app.post("/chat", async (req, res) => {
   try {
     const {sessionId,message}= req.body;
 
     const decision = await callLLM(message);
 
+    
     if(decision.tool){
       const result =await executeTool(decision.tool,decision.args);
       return res.json({
