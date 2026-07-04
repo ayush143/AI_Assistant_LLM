@@ -39,6 +39,7 @@ async function google(query){
   defaultViewport: null,
   args: ["--start-maximized"],
    });
+   
    const page = await browser.newPage();
  await page.goto("https://google.com",{
   waitUntil:"domcontentloaded",

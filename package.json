@@ -1,0 +1,26 @@
+{
+  "name": "ai-assistant-llm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1" ,
+   "dev": "concurrently \"npm --prefix Backend run dev\" \"npm --prefix Frontend run dev\""
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayush143/AI_Assistant_LLM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ayush143/AI_Assistant_LLM/issues"
+  },
+  "homepage": "https://github.com/ayush143/AI_Assistant_LLM#readme",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
