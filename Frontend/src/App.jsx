@@ -18,7 +18,7 @@ useEffect(() => {
     startListening();
   }
 }, [speaking, listening]);
- 
+  
 useEffect(() => {
   const handleKeyDown = (e) => {
     if (e.code === "Space") {

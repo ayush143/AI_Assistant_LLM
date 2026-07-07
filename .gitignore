@@ -1,2 +1,4 @@
 node_modules/
-new-chrome-profiles/
+new-chrome-profile/
+.env/
+Agent/
