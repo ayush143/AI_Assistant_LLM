@@ -3,7 +3,7 @@ async function callbackend(text) {
 try{
   const sessionId = sessionStorage.getItem("sessionId");
 
-      const res = await fetch(`http://localhost:3000/chat`, {
+      const res = await fetch(`https://ai-assistant-llm-brtw.onrender.com/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
