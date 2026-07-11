@@ -2,8 +2,11 @@ const puppeteer = require("puppeteer");
 const say = require("say");
 const { exec } = require("child_process");
 const axios = require("axios");
+const open=require("open");
+const { keyboard, Key }=require("@nut-tree-fork/nut-js");
 
-
+// nut-tree-fork for Move , mouseClick ,Type, textScroll
+// open to access device to open app
 
 let browser = null;
 let page = null;
@@ -40,7 +43,6 @@ async function youtube(args) {
 
     return `Playing ${query}`;
 }
-
 
 async function closeYoutube() {
     if (!browser) {
@@ -249,7 +251,7 @@ console.log("REMINDER:", query);
   return `Reminder set: ${message}`;
 }
 
- function startReminderService() {
+function startReminderService() {
   setInterval(() => {
     const now = Date.now();
     //  console.log("reminder is cheking");
@@ -276,24 +278,86 @@ function stopReminderService(query){
     }
 }
 
-function chatgpt(){
 
-  const url = `https://chatgpt.com`;
-  exec(`cmd /c start "" "${url}"`);
-  return ` chatgpt is on you screen Sir`;
+async function openApp(args) {
+   const app = args.app.toLowerCase();
+    console.log(app);
+
+    if(app ===  "vscode"){
+        await open("C:\Users\ask96\AppData\Local\Programs\Microsoft VS Code\Code.exe");
+        return "VS Code opened";
+    }
+
+    if(app=== "explorer" || app==="file explorer"){
+      await open("explorer");
+      return "file explorer is on you screen Sir"
+    }
+
+    if(app === "email" || app === "g-mail"){
+       await open("https://mail.google.com");
+       return `G-mail is on you screen Sir`;
+    }
+     
+    if (app === "notes" || app === "google notes"){
+       exec("start shell:AppsFolder\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App");
+       return `Notes is on you screen Sir`;
+    }
+  
+    return "Application not found";
 }
 
-function gmail() { 
+async function closeApp(args) {
+  console.log(args);
+  try {
+    const app = args.app?.toLowerCase();
 
-  const url = `https://mail.google.com`;
-  exec(`cmd /c start "" "${url}"`);
-  return `G-mail is on you screen Sir`;
+        if (app === "notes" || app === "sticky notes") {
+            exec("taskkill /IM Microsoft.Notes.exe /F");
+
+            return "Sticky Notes closed.";
+        }
+      if(app ===  "vscode"){
+        exec("taskkill /IM Code.exe /F");
+
+        return "VS Code closed.";
+      }
+// here we can't directly kill explorer because it will remove every think from screen so we will just close explorer window instead of kill whole explorer
+       if(app === "file explorer" || app==="explorer"){
+      exec('powershell -Command "$shell = New-Object -ComObject Shell.Application; $shell.Windows() | ForEach-Object { $_.Quit() }"');
+        return "VS Code closed.";
+      }
+
+      return "Application not supported.";
+  }
+  catch(error){
+    console.log(error);
+  }
 }
 
-function notes() { 
-
-  const url = `https://keep.google.com/u/0/`;
-  exec(`cmd /c start "" "${url}"`);
-  return `Google Notes is on you screen Sir`;
+async function typeText(args) {
+    try {
+        const { text } = args;
+        if (!text || typeof text !== "string") {
+            return {
+                success: false,
+                message: "No text provided."
+            };
+        }
+        // to measure time taken to write things
+        console.time("typing");
+        await keyboard.type(text);
+       console.timeEnd("typing");
+        return {
+            success: true,
+            message: "Text typed successfully."
+        };
+    } catch (error) {
+        return {
+            success: false,
+            message: error.message
+        };
+    }
 }
-module.exports ={youtube,time,google, chatgpt,gmail,notes,reminder,closeYoutube,startReminderService,stopReminderService,pauseYoutubeVideo,skipForwardYoutube,skipBackwardYoutube,resumeYoutubeVideo,nextYoutubeVideo,setYoutubeVolume,fullscreenYoutube};
+
+
+module.exports ={youtube,openApp,closeApp,typeText,time,google,reminder,closeYoutube,startReminderService,stopReminderService,pauseYoutubeVideo,skipForwardYoutube,skipBackwardYoutube,resumeYoutubeVideo,nextYoutubeVideo,setYoutubeVolume,fullscreenYoutube};
