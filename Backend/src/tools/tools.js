@@ -2,53 +2,145 @@ const puppeteer = require("puppeteer");
 const say = require("say");
 const { exec } = require("child_process");
 
-async function youtube(query) {
-  const browser = await puppeteer.launch({
-  headless: false,
-  executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-   userDataDir: "C:\\Mern_Projects\\AI-Assistant-LLM\\new-chrome-profile",
-  defaultViewport: null,
-  args: ["--start-maximized"],
-});
-  const page = await browser.newPage();
-await page.goto("https://youtube.com", {
-  waitUntil: "domcontentloaded",
-});
-  await page.waitForSelector('input[name="search_query"]');
-  await page.type('input[name="search_query"]',`${query}`);
-  await page.keyboard.press('Enter')
+let browser = null;
+let page = null;
 
-await page.waitForSelector("a#video-title");
-const videos = await page.$$("a#video-title");
+async function youtube(args) {
+    const query = args.query;
 
-if (videos.length > 0) {
-  await videos[0].click();
+    if (!browser) {
+        browser = await puppeteer.launch({
+            headless: false,
+            executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+            userDataDir: "C:\\Mern_Projects\\AI-Assistant-LLM\\new-chrome-profile",
+            defaultViewport: null,
+            args: ["--start-maximized"],
+        });
+
+        page = await browser.newPage();
+    }
+    await page.goto("https://youtube.com", {
+        waitUntil: "domcontentloaded",
+    });
+
+    await page.waitForSelector('input[name="search_query"]');
+    await page.type('input[name="search_query"]', query);
+    await page.keyboard.press("Enter");
+
+    await page.waitForSelector("a#video-title");
+
+    const videos = await page.$$("a#video-title");
+
+    if (videos.length > 0) {
+        await videos[0].click();
+    }
+
+    return `Playing ${query}`;
 }
-  console.log("yt is opened");
+
+async function closeYoutube() {
+    if (!browser) {
+        return "No YouTube browser is open.";
+    }
+
+    await browser.close();
+
+    browser = null;
+    page = null;
+
+    return "YouTube closed.";
+}
+
+async function pauseYoutubeVideo() {
+    if (!page) return "No YouTube video is open.";
+
+    await page.keyboard.press("k");
+    return "Paused.";
+}
+
+async function resumeYoutubeVideo() {
+    if (!page) return "No YouTube video is open.";
+
+    await page.keyboard.press("k");
+    return "Resumed.";
+}
+
+async function nextYoutubeVideo() {
+    if (!page) return "No YouTube video is open.";
+
+    await page.keyboard.down("Shift");
+    await page.keyboard.press("N");
+    await page.keyboard.up("Shift");
+
+    return "Playing next video.";
+}
+
+async function skipForwardYoutube() {
+    if (!page) return "No YouTube video is open.";
+
+    await page.keyboard.press("l");
+
+    return "Forwarded 10 seconds.";
+}
+
+async function skipBackwardYoutube() {
+    if (!page) return "No YouTube video is open.";
+
+    await page.keyboard.press("j");
+
+    return "Rewinded 10 seconds.";
+}
+
+async function fullscreenYoutube() {
+    if (!page) return "No YouTube video is open.";
+
+    await page.keyboard.press("f");
+
+    return "Fullscreen enabled.";
+}
+
+async function setYoutubeVolume(args) {
+    if (!page) {
+        return "No YouTube video is open.";
+    }
+    const percent = Math.max( 0,Math.min(100, Number(args.percent)));
+
+    await page.evaluate((volume) => {
+        const video = document.querySelector("video");
+
+        if (video) {
+            video.volume = volume / 100;}
+    }, percent);
+
+    return `YouTube volume set to ${percent}%`;
 }
 
 function time(){
     return new Date().toLocaleTimeString();
 }
 
-async function google(query){
-   const browser = await  puppeteer.launch({
-    headless:false,
-   executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-   userDataDir: "C:\\Mern_Projects\\AI-Assistant-LLM\\chrome-profile",
-  defaultViewport: null,
-  args: ["--start-maximized"],
-   });
-   
-   const page = await browser.newPage();
- await page.goto("https://google.com",{
-  waitUntil:"domcontentloaded",
- });
- await page.waitForSelector("textarea[name='q']");
- await page.type("textarea[name='q']" ,`${query}`);
- await page.keyboard.press("Enter");
+async function google(args) {
+    const query = args.query;
 
- await page.waitForSelector('#search');
+    const browser = await puppeteer.launch({
+        headless: false,
+        executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        userDataDir: "C:\\Mern_Projects\\AI-Assistant-LLM\\chrome-profile",
+        defaultViewport: null,
+        args: ["--start-maximized"],
+    });
+
+    const page = await browser.newPage();
+
+    await page.goto("https://google.com", {
+        waitUntil: "domcontentloaded",
+    });
+
+    await page.waitForSelector("textarea[name='q']");
+    await page.type("textarea[name='q']", query);
+    await page.keyboard.press("Enter");
+
+     await page.waitForSelector('#search');
 
 const firstUrl = await page.$eval(
     "#search .tF2Cxc a",
@@ -82,9 +174,11 @@ return formatted;
 }
 
  const reminders = [];
-function reminder(query) {
+function reminder(args) {
 
-  console.log("REMINDER ARGS:", query);
+ const query = args.query;
+console.log("REMINDER:", query);
+
   const text = query || "";
 
   if (!text) {
@@ -162,4 +256,4 @@ function notes() {
   exec(`cmd /c start "" "${url}"`);
   return `Google Notes is on you screen Sir`;
 }
-module.exports ={youtube,time,google, chatgpt,gmail,notes,reminder,startReminderService,stopReminderService};
+module.exports ={youtube,time,google, chatgpt,gmail,notes,reminder,closeYoutube,startReminderService,stopReminderService,pauseYoutubeVideo,skipForwardYoutube,skipBackwardYoutube,resumeYoutubeVideo,nextYoutubeVideo,setYoutubeVolume,fullscreenYoutube};

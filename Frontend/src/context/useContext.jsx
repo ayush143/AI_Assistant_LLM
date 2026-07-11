@@ -62,6 +62,7 @@ if (!sessionId) {
     const speech = new SpeechSynthesisUtterance(aiResponse);
 
     setCurrentAnimation("Armature|mixamo.com|Layer0.005 Retarget");
+    
     setSpeaking(true);
  const voices = window.speechSynthesis.getVoices();
 

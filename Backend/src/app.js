@@ -14,7 +14,6 @@ app.listen(PORT, () => {
 });
 
 async function sendMessage(userMessage, history) {
-
   const messages = [
     {
       role: "system",
@@ -101,6 +100,7 @@ app.post("/chat", async (req, res) => {
   
     console.log(req.body.message);
     console.log(aiResponse);
+    
   } catch (error) {
     res.status(500).json({
       error: error.message,
