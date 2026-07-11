@@ -1,13 +1,16 @@
 const puppeteer = require("puppeteer");
 const say = require("say");
 const { exec } = require("child_process");
+const axios = require("axios");
+
+
 
 let browser = null;
 let page = null;
 
 async function youtube(args) {
+  
     const query = args.query;
-
     if (!browser) {
         browser = await puppeteer.launch({
             headless: false,
@@ -38,13 +41,12 @@ async function youtube(args) {
     return `Playing ${query}`;
 }
 
+
 async function closeYoutube() {
     if (!browser) {
         return "No YouTube browser is open.";
     }
-
     await browser.close();
-
     browser = null;
     page = null;
 
@@ -53,7 +55,6 @@ async function closeYoutube() {
 
 async function pauseYoutubeVideo() {
     if (!page) return "No YouTube video is open.";
-
     await page.keyboard.press("k");
     return "Paused.";
 }
@@ -146,13 +147,13 @@ const firstUrl = await page.$eval(
     "#search .tF2Cxc a",
     el => el.href
   );
-
   await page.goto(firstUrl, {
     waitUntil: "domcontentloaded",
   });
   const results = await page.evaluate(() => {
 
-    document.querySelectorAll('script,style,nav,footer,header,aside').forEach(el => el.remove());
+    document.querySelectorAll( 
+      "script","style","nav","footer","header","aside","noscript","iframe","button","svg","form").forEach(el => el.remove());
 
     const title = document.title;
 
@@ -160,17 +161,56 @@ const firstUrl = await page.$eval(
       .replace(/\s+/g, ' ')
       .trim();
 
-    const snippet = text.slice(0, 1000);
-
-    return { title, snippet };
+    const content = text.slice(0, 6000);
+    return { title, content };
   });
-  console.log(results);
-  await browser.close();
+  
+ await browser.close();
 
-const formatted = results
-  ? `Title: ${results.title}\n Snippet: ${results.snippet}`:"answere not found";
+  const prompt =`
+You are a research assistant.
 
-return formatted;
+Read this website content and summarize the important information.
+
+Website:
+${results.title}
+
+Content:
+${results.content}
+
+Give a clear short answer.`;
+ 
+try{
+const res = await axios.post(
+    "http://localhost:11434/api/chat",
+    {
+      model: "llama3.1:8b",
+      messages: [
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      stream: false
+    },
+    {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  );
+  const data =
+    res.data?.message?.content ||
+    res.data?.response ||
+    res.data?.completion ||
+    "";
+  console.log(data);
+  return data;
+}
+catch(error){
+console.log(error.message);
+}
+
 }
 
  const reminders = [];

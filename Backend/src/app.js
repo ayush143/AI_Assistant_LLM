@@ -47,7 +47,8 @@ CRITICAL RULE:
     content: userMessage
   });
   
-  const res = await axios.post(
+  try{
+     const res = await axios.post(
     "http://localhost:11434/api/chat",
     {
       model: "llama3.1:8b",
@@ -67,6 +68,11 @@ CRITICAL RULE:
     "";
 
   return data;
+  }
+    catch(error){
+    console.log(error.response?.data || error.message);
+  }
+ 
 }
 
 
