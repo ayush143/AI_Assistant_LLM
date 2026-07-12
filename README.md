@@ -1,4 +1,4 @@
-                                           🤖 AI Voice Assistant
+🤖 AI Voice Assistant
  
 ## 🎥 Demo Video
 
