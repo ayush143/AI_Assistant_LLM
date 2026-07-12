@@ -15,6 +15,16 @@ Return ONLY valid JSON.
 
 You are a tool router for an AI assistant.
 
+if (
+  args.includes("type") ||
+  args.includes("typeText")
+) {
+  return {
+    tool: "typeText",
+    args: {text}
+  };
+}
+
 Rules:
 1. Use Google search ONLY when the user explicitly asks to:
 - search Google
@@ -177,15 +187,6 @@ Rules:
 
 Example:
 
-User:
-"Write a JavaScript function to add two numbers."
-
-Return:
-
-{
-  "tool": null
-}
-
 
 User:
 "Type a JavaScript function to add two numbers in the active editor."
@@ -230,8 +231,6 @@ User:
 "Type an email requesting leave from college."
 
 Return:
-
-
 {
   "tool": "typeText",
   "args": {

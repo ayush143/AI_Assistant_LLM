@@ -293,12 +293,12 @@ async function openApp(args) {
       return "file explorer is on you screen Sir"
     }
 
-    if(app === "email" || app === "g-mail"){
+    if(app === "email" || app === "gmail"){
        await open("https://mail.google.com");
        return `G-mail is on you screen Sir`;
     }
      
-    if (app === "notes" || app === "google notes"){
+    if (app === "notes" || app === "google notes"||app==="Notepad"){
        exec("start shell:AppsFolder\\Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App");
        return `Notes is on you screen Sir`;
     }
@@ -311,7 +311,7 @@ async function closeApp(args) {
   try {
     const app = args.app?.toLowerCase();
 
-        if (app === "notes" || app === "sticky notes") {
+        if (app === "notes" || app === "sticky notes"|| app==="Notepad") {
             exec("taskkill /IM Microsoft.Notes.exe /F");
 
             return "Sticky Notes closed.";

@@ -1,3 +1,4 @@
-2026/07/11-17:50:12.848 61e4 Reusing MANIFEST C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/MANIFEST-000001
-2026/07/11-17:50:12.855 61e4 Recovering log #3
-2026/07/11-17:50:12.856 61e4 Reusing old log C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/000003.log 
+2026/07/12-23:00:28.825 4e28 Reusing MANIFEST C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/MANIFEST-000001
+2026/07/12-23:00:28.825 4e28 Recovering log #6
+2026/07/12-23:00:28.826 4e28 Reusing old log C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/000006.log 
+2026/07/12-23:00:28.826 4e28 Delete type=2 #5

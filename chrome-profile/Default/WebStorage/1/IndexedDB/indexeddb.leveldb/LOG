@@ -1,18 +1,3 @@
-2026/07/11-17:54:11.928 5100 Reusing MANIFEST C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/MANIFEST-000001
-2026/07/11-17:54:11.929 5100 Recovering log #3
-2026/07/11-17:54:11.929 5100 Reusing old log C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/000003.log 
-2026/07/11-17:54:11.940 6e3c Level-0 table #5: started
-2026/07/11-17:54:11.944 6e3c Level-0 table #5: 25737 bytes OK
-2026/07/11-17:54:11.946 6e3c Delete type=0 #3
-2026/07/11-17:54:11.946 5100 Manual compaction at level-0 from '\x00\x02\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x03\x00\x00\x00' @ 0 : 0; will stop at (end)
-2026/07/11-17:54:11.947 6e3c Level-0 table #7: started
-2026/07/11-17:54:11.957 6e3c Level-0 table #7: 911 bytes OK
-2026/07/11-17:54:11.959 6e3c Delete type=0 #4
-2026/07/11-17:54:11.959 5100 Manual compaction at level-0 from '\x00\x03\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at (end)
-2026/07/11-17:54:11.959 5100 Manual compaction at level-1 from '\x00\x03\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at '\x00\x03\x01\x1f\x04\x03\x01\x03\x00N\x00E\x00W\x03\x00\x00\x00\x00\x00\x00L@\x03\x00 l\xf0\x11\xf5yB\x00\x03\x00\x00\x00\x00\x00\x00\x08@' @ 477 : 0
-2026/07/11-17:54:11.960 5100 Compacting 1@1 + 1@2 files
-2026/07/11-17:54:11.971 5100 Generated table #8@1: 38 keys, 997 bytes
-2026/07/11-17:54:11.972 5100 Compacted 1@1 + 1@2 files => 997 bytes
-2026/07/11-17:54:11.973 5100 compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/07/11-17:54:11.973 5100 Delete type=2 #7
-2026/07/11-17:54:11.973 5100 Manual compaction at level-1 from '\x00\x03\x01\x1f\x04\x03\x01\x03\x00N\x00E\x00W\x03\x00\x00\x00\x00\x00\x00L@\x03\x00 l\xf0\x11\xf5yB\x00\x03\x00\x00\x00\x00\x00\x00\x08@' @ 477 : 0 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/07/12-23:00:55.981 4530 Reusing MANIFEST C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/MANIFEST-000001
+2026/07/12-23:00:55.981 4530 Recovering log #6
+2026/07/12-23:00:55.982 4530 Reusing old log C:\Mern_Projects\AI-Assistant-LLM\chrome-profile\Default\WebStorage\1\IndexedDB\indexeddb.leveldb/000006.log 
