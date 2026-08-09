@@ -51,7 +51,8 @@ CRITICAL RULE:
      const res = await axios.post(
     "http://localhost:11434/api/chat",
     {
-      model: "llama3.1:8b",
+      // model: "llama3.1:8b",
+      model: "qwen3:8b",
       messages,
       stream: false
     },

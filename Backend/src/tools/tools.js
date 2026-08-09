@@ -17,8 +17,8 @@ async function youtube(args) {
     if (!browser) {
         browser = await puppeteer.launch({
             headless: false,
-            executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-            userDataDir: "C:\\Mern_Projects\\AI-Assistant-LLM\\new-chrome-profile",
+             executablePath: "C:\\Users\\ask96\\AppData\\Local\\BraveSoftware\\Brave-Browser\\Application\\brave.exe",
+            userDataDir: "C:\\Mern_Projects\\AI-Assistant-LLM\\chrome-profile",
             defaultViewport: null,
             args: ["--start-maximized"],
         });
@@ -186,7 +186,9 @@ try{
 const res = await axios.post(
     "http://localhost:11434/api/chat",
     {
-      model: "llama3.1:8b",
+      // model: "llama3.1:8b",
+        model: "qwen3:8b",
+
       messages: [
         {
           role: "user",
