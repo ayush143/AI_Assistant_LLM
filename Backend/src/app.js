@@ -54,6 +54,7 @@ CRITICAL RULE:
       // model: "llama3.1:8b",
       model: "qwen3:8b",
       messages,
+      think: false,
       stream: false
     },
     {
@@ -82,7 +83,6 @@ app.post("/chat", async (req, res) => {
     const {sessionId,message}= req.body;
 
     const decision = await callLLM(message);
-
     
     if(decision.tool){
       const result =await executeTool(decision.tool,decision.args);

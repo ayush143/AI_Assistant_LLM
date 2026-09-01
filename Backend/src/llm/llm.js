@@ -213,7 +213,6 @@ Return:
   }
 }
 
-
 User:
 "Type an essay on cow in 20 lines."
 
@@ -253,10 +252,16 @@ User: "Open VS Code"
 
 Return:
 {
-  "tool": "openApp",
+  "tool": "openVsCode",
   "args": {
     "app": "vscode"
   }
+}
+User:"closeVsCode"
+
+return:{
+ "tool":"openVsCode",
+ "args":{}
 }
 Available tools:
 
@@ -353,6 +358,19 @@ args:
   Description:: close a desktop application requested by the user.
    app: "string"   
  
+22. openVsCode
+Description: open vs code for coading .
+Arguments:
+{
+  "query": "string"
+}   
+ 
+23. closeVsCode
+Description: close vs code .
+Arguments:
+{
+  "query": "string"
+} 
 
 If a tool is needed, return:
 
@@ -382,6 +400,7 @@ console.time("typing");
       // model: "llama3.1:8b",
       model: "qwen3:8b",
       messages,
+      think: false,
       stream: false
     },
     {

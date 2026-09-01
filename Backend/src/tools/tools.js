@@ -43,16 +43,43 @@ async function youtube(args) {
 
     return `Playing ${query}`;
 }
-
 async function closeYoutube() {
     if (!browser) {
         return "No YouTube browser is open.";
     }
     await browser.close();
     browser = null;
+
     page = null;
 
     return "YouTube closed.";
+}
+
+async function openVsCode() {
+
+    browser = await puppeteer.launch({
+        headless: false,
+        defaultViewport: null,
+        args: ["--start-maximized"]
+    });
+ 
+     page = await browser.newPage();
+
+    await page.goto("https://vscode.dev/", {
+        waitUntil: "networkidle2"
+    });
+
+    console.log("VS Code opened in the browser.");
+}
+async function closeVsCode() {
+    if (!browser) {
+        return "No vs Code is open.";
+    }
+    await browser.close();
+    browser = null;
+    page = null;
+
+    return "Vs code closed sir.";
 }
 
 async function pauseYoutubeVideo() {
@@ -285,10 +312,10 @@ async function openApp(args) {
    const app = args.app.toLowerCase();
     console.log(app);
 
-    if(app ===  "vscode"){
-        await open("C:\Users\ask96\AppData\Local\Programs\Microsoft VS Code\Code.exe");
-        return "VS Code opened";
-    }
+    // if(app ===  "vscode"){
+    //     await open("https://vscode.dev/");
+    //     return "VS Code is on your screen Sir";
+    // }
 
     if(app=== "explorer" || app==="file explorer"){
       await open("explorer");
@@ -318,15 +345,10 @@ async function closeApp(args) {
 
             return "Sticky Notes closed.";
         }
-      if(app ===  "vscode"){
-        exec("taskkill /IM Code.exe /F");
-
-        return "VS Code closed.";
-      }
 // here we can't directly kill explorer because it will remove every think from screen so we will just close explorer window instead of kill whole explorer
        if(app === "file explorer" || app==="explorer"){
       exec('powershell -Command "$shell = New-Object -ComObject Shell.Application; $shell.Windows() | ForEach-Object { $_.Quit() }"');
-        return "VS Code closed.";
+        return "file explorer.";
       }
 
       return "Application not supported.";
@@ -362,4 +384,4 @@ async function typeText(args) {
 }
 
 
-module.exports ={youtube,openApp,closeApp,typeText,time,google,reminder,closeYoutube,startReminderService,stopReminderService,pauseYoutubeVideo,skipForwardYoutube,skipBackwardYoutube,resumeYoutubeVideo,nextYoutubeVideo,setYoutubeVolume,fullscreenYoutube};
+module.exports ={youtube,openApp,closeApp,openVsCode,closeVsCode,typeText,time,google,reminder,closeYoutube,startReminderService,stopReminderService,pauseYoutubeVideo,skipForwardYoutube,skipBackwardYoutube,resumeYoutubeVideo,nextYoutubeVideo,setYoutubeVolume,fullscreenYoutube};

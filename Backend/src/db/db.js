@@ -6,8 +6,8 @@ async function ConnectDB() {
       console.log("Database is Connected");
     }
     
-    catch{
-        console.log("Error :Database is Failed to connect",error);
+    catch(error){
+      console.log("Error :Database is Failed to connect", error);
     }
 }
 module.exports = ConnectDB ;
