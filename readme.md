@@ -9,7 +9,7 @@ The project combines a modern web stack with **Ollama and local LLMs** to create
 > 🚧 **Status: Active Development**
 
 ---
-Sample of Assistant by watching this you can understand how it works in realtime 
+## Sample of Assistant by watching this you can understand how it works in realtime 
 
 https://lnkd.in/p/gQkYV52F
 
